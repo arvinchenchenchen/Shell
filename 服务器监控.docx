@@ -1,0 +1,23 @@
+uptime|awk -F: '{print "本机CPU最近15分钟的负载是   "$NF}'
+#uptime|awk '{print "本机CPU最近15分钟的负载是   "$9 $10 $11}'
+
+#查看网卡流量
+ifconfig eth0 | awk '/RX pa/{print "入站网卡数据流量   "$5}'
+ifconfig eth0 | awk '/TX pa/{print "出站网卡数据流量   "$5}'
+
+#查看空余内存容量
+free|awk '/Mem/{print "服务器内存空余  " $4}'
+
+#查看跟分区剩余容量
+df|awk '/\/$/{print "根分区剩余容量   "$4}'
+
+#本地账户数量
+wc -l /etc/passwd|awk '{print "本地账户数量   " $1}'
+
+#查看登录账户信息
+login=`who|wc -l`
+echo "当前登录计算机的账户数量为   $login"
+
+#查看已经安装软件数量
+sum=`rpm -qa|wc -l`
+echo "当前计算机已经安装的软件数量   $sum" 
